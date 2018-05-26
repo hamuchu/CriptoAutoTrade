@@ -1,4 +1,6 @@
 #coding: utf-8
+
+#coding: utf-8
 #https://qiita.com/aaatsushi_bb/items/0b605c0f27493f005c88
 import numpy
 from trade_class import TradeClass
@@ -7,6 +9,8 @@ import copy
 import numpy as np
 from sklearn.grid_search import GridSearchCV
 import matplotlib as plt
+import matplotlib.pyplot as plt
+
 trade=TradeClass()
 time_date, price_data = trade.getDataPoloniex()
 
@@ -46,42 +50,9 @@ X_test,y_test = trade.PercentageLabel(X_test,y_test)
 import xgboost as xgb
 import pickle
 
-'''
+
 with open('xgbmodel.pickle', mode='rb') as f:
-    model=pickle.load(f)
-'''
-
-'''
-model=xgb.XGBRegressor(learning_rate = 0.01, n_estimators=2000,
-                           max_depth=10, min_child_weight=1,
-                           gamma=0.2, objective= "reg:linear",
-                           nthread=-1,scale_pos_weight=1, seed=27)
-'''
-
-
-fit_params = {"early_stopping_rounds": 100,
-              "eval_set": [[X_test, y_test]]}
-
-xgb_model = xgb.XGBRegressor()
-'''
-params = {"learning_rate":[0.1,0.3,0.5],
-        "max_depth": [2,3,5,10],
-         "subsample":[0.5,0.8,0.9,1],
-         "colsample_bytree": [0.5,1.0],
-         }
-gs = GridSearchCV(xgb_model,
-                  params,
-                  fit_params=fit_params,
-                  cv=10,
-                  n_jobs=-1,
-                  verbose=2)
-
-gs.fit(X_train, y_train)
-'''
-
-xgb_model.fit(X_train,y_train)
-
-#model.fit(X_train,y_train)
+    xgb_model=pickle.load(f)
 
 y_pred = xgb_model.predict(X_test)
 predictions = [value for value in y_pred]
@@ -89,7 +60,7 @@ print("Predictions!!!!!!!!!!!!!!!!!!!!!!!!!!")
 print(predictions)
 
 
-pickle.dump(xgb_model, open("xgbmodel.pickle", "wb"))
+pickle.dump(xgb_model, open("xbgmodel.pickle", "wb"))
 
 '''
 with open('xgbmodel.pickle', mode='wb') as f:
