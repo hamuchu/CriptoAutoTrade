@@ -1,6 +1,4 @@
 #coding: utf-8
-
-#coding: utf-8
 #https://qiita.com/aaatsushi_bb/items/0b605c0f27493f005c88
 import numpy
 from trade_class import TradeClass
@@ -78,4 +76,4 @@ plt.legend()
 plt.show()
 
 print("FINAL money")
-print(trade.simulate_trade(y_real_test,X_test,model))
+print(trade.simulate_trade(y_real_test,X_test,xgb_model))
